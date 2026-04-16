@@ -1,0 +1,56 @@
+# Environment Setup for MMLU-Pro Math Tester / Phase LoRA Trainer
+# Python 3.10+
+# CUDA 12.1 required
+
+# Core PyTorch (CUDA 12.1)
+torch==2.5.1+cu121
+torchaudio==2.5.1+cu121
+torchvision==0.20.1+cu121
+
+# Transformers and related
+transformers==5.6.0.dev0
+tokenizers==0.22.2
+huggingface_hub==1.10.2
+safetensors==0.7.0
+
+# Quantization (4-bit models)
+bitsandbytes==0.49.2
+
+# LoRA support
+peft==0.7.1
+
+# Training (TRL - Transformer Reinforcement Learning)
+trl==1.2.0.dev0
+
+# Dataset handling
+datasets==4.8.4
+dill==0.4.1
+pyarrow==23.0.1
+
+# Accelerate
+accelerate==1.13.0
+
+# UI
+customtkinter==5.2.2
+
+# Other utilities
+numpy==1.26.4
+scipy==1.15.3
+pandas==2.3.3
+Pillow==12.1.1
+PyYAML==6.0.3
+requests==2.33.1
+tqdm==4.67.3
+regex==2026.4.4
+
+# Optional but useful
+python-dateutil==2.9.0.post0
+setuptools==65.5.0
+pip==23.0.1
+
+# Install command:
+# pip install torch==2.5.1+cu121 torchaudio==2.5.1+cu121 torchvision==0.20.1+cu121 --index-url https://download.pytorch.org/whl/cu121
+# pip install transformers==5.6.0.dev0 tokenizers==0.22.2 huggingface_hub==1.10.2 safetensors==0.7.0
+# pip install bitsandbytes==0.49.2 peft==0.7.1 trl==1.2.0.dev0 datasets==4.8.4
+# pip install accelerate==1.13.0 customtkinter==5.2.2
+# pip install numpy scipy pandas Pillow PyYAML requests tqdm regex
