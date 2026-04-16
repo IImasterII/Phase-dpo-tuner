@@ -28,6 +28,26 @@
 
 ## Архитектура
 
+```mermaid
+graph TB
+    subgraph "Phase DPO Tuner"
+        A[📦 Базовая модель<br/>Qwen3.5-4B] --> B[🔧 Phase Attention<br/>Patching]
+        B --> C[🎯 LoRA Adapter<br/>phase_q / phase_k]
+        
+        C --> D[phase_q<br/>Linear]
+        C --> E[phase_k<br/>Linear]
+        
+        D --> F[📊 DPO Training Loop]
+        E --> F
+        
+        F --> G[💾 LoRA Adapter<br/>~1.3 MB]
+    end
+    
+    style A fill:#1a1a2e,stroke:#8A2BE2,color:#fff
+    style B fill:#2a3d45,stroke:#00F0FF,color:#eee
+    style C fill:#3e3e3e,stroke:#FFD700,color:#fff
+    style F fill:#4d2c2c,stroke:#FF4500,color:#fff
+    style G fill:#2d4a3e,stroke:#28a745,color:#fff
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Phase DPO Tuner                          │
@@ -116,31 +136,7 @@ L_DPO = -E[log(σ(β · (log π_θ(y_chosen|x) - log π_θ(y_rejected|x))))]
 
 ## Mission Control: GUI
 
-```
-┌──────────────────────────────────────────────────────────┐
-│           🌌 Phase DPO Tuner                              │
-├──────────────────────────────────────────────────────────┤
-│  📁 Файлы                                   VRAM: 4.2/8GB │
-│  Модель:    [••••••••••••••••••] [📂]                    │
-│  Датасет:   [••••••••••••••••••] [📂]                    │
-│  Вывод:     [./adapter_1430]                              │
-├──────────────────────────────────────────────────────────┤
-│  ⚙️ Параметры                                             │
-│  max_seq_len: 256   epochs: 3    grad_accum: 8          │
-│  lora_r: 16        lora_alpha: 32 lora_dropout: 0.05    │
-│  lr: 5e-5                                                │
-├──────────────────────────────────────────────────────────┤
-│  [▶️ СТАРТ]                    [🛑 СТОП]                 │
-├──────────────────────────────────────────────────────────┤
-│  🚀 Инициализация...                                     │
-│  ✅ GPU: NVIDIA GeForce RTX 3060                         │
-│  📦 Загрузка модели (4-bit NF4)...                       │
-│  🔧 Внедрение Phase Attention...                         │
-│  ✅ Слоёв пропатчено: 28                                 │
-│  📊 Обучаемых параметров: 53,248                         │
-│  🔥 Начало обучения...                                   │
-└──────────────────────────────────────────────────────────┘
-```
+![GUI Screenshot](image.png)
 
 **Особенности интерфейса:**
 
